@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordCoopCords", "DiscordCoopCords\DiscordCoopCords.csproj", "{76A9F853-4FDF-4D2F-80F4-923D4871F7B1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiscordCoopCodes", "DiscordCoopCodes\DiscordCoopCodes.csproj", "{76A9F853-4FDF-4D2F-80F4-923D4871F7B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
