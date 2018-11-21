@@ -5,6 +5,7 @@ using DiscordCoopCodes.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DiscordCoopCords {
@@ -41,9 +42,20 @@ namespace DiscordCoopCords {
 
             if (message.Content.StartsWith("!")) {
                 var command = message.Content.Substring(1).Split(' ')[0].ToLower();
+                var args = message.Content.Split(' ').Skip(1).ToArray();
                 switch(command) {
                     case "ping": await Ping.ExecuteAsync(message); break;
                     case "newcode": await NewCode.ExecuteAsync(message); break;
+                    case "contracttime": await TimeRemaining.ExecuteAsync(message, args); break;
+                    case "help":
+                        await message.Channel.SendMessageAsync($@"Available Commands: 
+!ping (Tests to see if bot is listening) 
+!newcode (Will give a new code for starting a contract),
+!contracttime {{targetEggsShipped}} {{currentEggsShipped}} {{currentShippingRate}} (Tells you how much time till you will complete a contract without counting growth)");
+                        break;
+                    default:
+                        await message.Channel.SendMessageAsync($"Unknown Command {command}. Type !help for available commands.");
+                        break;
                 }
             }
         }
