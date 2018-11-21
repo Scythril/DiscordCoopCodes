@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using DiscordCoopCodes;
+using DiscordCoopCodes.Commands;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -37,15 +38,13 @@ namespace DiscordCoopCords {
 
         private async Task MessageReceived(SocketMessage message) {
             Console.WriteLine($"Message: {message}");
-            switch(message.Content) {
-                case "!newcode":
-                    var words = new Words();
-                    var code = words.GetRandomWord() + words.GetRandomWord() + words.GetRandomNumber();
-                    await message.Channel.SendMessageAsync(code);
-                    break;
-            }
-            if (message.Content == "!ping") {
-                await message.Channel.SendMessageAsync("Pong!");
+
+            if (message.Content.StartsWith("!")) {
+                var command = message.Content.Substring(1).Split(' ')[0].ToLower();
+                switch(command) {
+                    case "ping": await Ping.ExecuteAsync(message); break;
+                    case "newcode": await NewCode.ExecuteAsync(message); break;
+                }
             }
         }
     }
